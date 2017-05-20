@@ -23,10 +23,10 @@ exports.handler = function(event, context) {
 
     var eventType = event.eventType;
     var productid = event.productid;
-
+    
     // product is now available
     if (eventType == "track") {
-        client.get('productid' + productid, function(err, value) {
+        client.get('productid:' + productid, function(err, value) {
             context.succeed(value);
         })
 
@@ -34,7 +34,7 @@ exports.handler = function(event, context) {
         // product is now out of stock
         client.set('productid:' + productid, 0, function(err, value) {
             console.log(err)
-        })
+         })
         console.log(eventType)
         context.succeed("hello muhammet");
     }
